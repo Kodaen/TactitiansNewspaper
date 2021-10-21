@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POTW{% endblock %}
+
+{% block content %}
+    <h1>POTW</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ p_o_t_w.name }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ p_o_t_w.source }}</td>
+                <td><iframe width="560" height="315" src={{ p_o_t_w.source}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+            </tr>
+        </tbody>
+    </table>
+
+    {%if is_granted('ROLE_ADMIN') %}
+        <p>Id</p>
+        <p>{{ p_o_t_w.id }}</p>
+        <a href="{{ path('p_o_t_w_crud_index') }}">back to list</a>
+
+        <a href="{{ path('p_o_t_w_crud_edit', {'id': p_o_t_w.id}) }}">edit</a>
+
+        {{ include('potw_crud/_delete_form.html.twig') }}
+    {%endif%}
+{% endblock %}

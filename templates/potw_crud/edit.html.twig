@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit POTW{% endblock %}
+
+{% block content %}
+    <h1>Edit POTW</h1>
+
+    {{ include('potw_crud/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('p_o_t_w_crud_index') }}">back to list</a>
+
+    {{ include('potw_crud/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POTW index{% endblock %}
+
+{% block content %}
+    <h1>POTW index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Source</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p_o_t_w in p_o_t_ws %}
+            <tr>
+                <td>{{ p_o_t_w.id }}</td>
+                <td>{{ p_o_t_w.name }}</td>
+                <td>{{ p_o_t_w.source }}</td>
+                <td>
+                    <a href="{{ path('p_o_t_w_crud_show', {'id': p_o_t_w.id}) }}">show</a>
+                    <a href="{{ path('p_o_t_w_crud_edit', {'id': p_o_t_w.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('p_o_t_w_crud_new') }}">Create new</a>
+{% endblock %}

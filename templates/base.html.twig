@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+
+        <link rel="stylesheet" href="/style.css">
+
+        {% block javascripts %}
+            
+        {% endblock %}
+    </head>
+    <body>
+
+        <header>
+            <h1>Tacticians' Newspaper</h1>
+            <aside>
+                {%if app.user %} 
+                <p>Hello </p>
+                <p id="Username">{{app.user.username}} /</p>
+                <a href="/logout">Se déconnecter</a>
+                {%else%} 
+                <a href="/login">Se connecter</a> 
+                <p>/</p> 
+                <a href="/register">S'enregistrer</a>
+                {%endif%} 
+            </aside>
+            
+            
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/potw">Play of the week</a></li>
+                <li><a href="">World Record</a></li>
+                <li><a href="">Funny Stuff</a></li>
+                {%if is_granted('ROLE_ADMIN') %}
+                <HR class="admintool"></HR>
+                <li class="admintool"><a href="/admin/user">Users</a></li>
+                <li class="admintool"><a href="/admin/article">Article</a></li>
+                <li class="admintool"><a href="/admin/POTWcrud">POTW Crud</a></li>
+                
+                
+                {%endif%} 
+            </ul>
+        </nav>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+         <p>Test</p>    
+        </footer>
+        
+        
+
+    </body>
+</html>
