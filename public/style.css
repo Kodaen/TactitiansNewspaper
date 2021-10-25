@@ -1,8 +1,8 @@
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -27,7 +27,9 @@ body {
 	line-height: 1;
 }
 ol, ul {
+	/* align-content: start; */
 	list-style: none;
+	text-align: center;
 }
 blockquote, q {
 	quotes: none;
@@ -48,8 +50,13 @@ body {
 }
 
 main{
-	margin-bottom : 5%;
 	min-height: 75vh;
+	padding-bottom: 300px;
+	background-image: url(/image/Daraen.png);
+    background-size: 300px;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: bottom;
 }
 
 header {
@@ -85,6 +92,11 @@ footer {
 	box-shadow: 0px 0px 10px 0px black;
 }
 
+footer li{
+	display: inline-block;
+	width: calc(19% - 1px);
+}
+
 nav{
 	width: 100%;
 	margin: auto;
@@ -104,12 +116,11 @@ nav li
 	width: calc(19% - 1px);
 }
 
-nav li:last-child
-{
-	display: inline-block;
-	width: calc(20% - 1px);
-}
 
+a:hover {
+	text-decoration : underline;
+	color : blue;
+}
 nav a{	
 	display: block;
 	width: 100%;
@@ -120,12 +131,25 @@ nav a{
 	color: black;
 }
 
-nav a:hover {
-	text-decoration : underline;
-	color : blue;
-	
+footer li, footer a {
+	margin-top:10px;
+	text-decoration:none;
+	color:#ededed;
 }
 
 #list {
 	display : inline-flex;
+}
+
+span{
+	display: flex;
+}
+
+span .tags{
+	margin : 5px;
+	background-color: #04aa90;
+	padding:3px;
+	border-radius: 7px;
+	color: whitesmoke;
+	box-shadow: 0px 0px 1px 1px #3c8568;
 }

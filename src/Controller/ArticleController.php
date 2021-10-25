@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\TagRepository;
+use App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +24,29 @@ class ArticleController extends AbstractController
     }
 
     #[Route('admin/article/new', name: 'article_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, TagRepository $tagRepository): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
+
+        //C'est moa qui é fé ça! 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $tags = $form->get('tags')->getData();
+            $tags = explode(';', $tags);
+            foreach ($tags as $tag) {
+                $tag = trim($tag);
+                $entityTag = $tagRepository->findBy(['name' => $tag]);
+                if (!isset($entityTag[0])) {
+                    $entityTag[0] = new Tag();
+                    $entityTag[0]->setName($tag);
+                    $entityManager->persist($entityTag[0]);
+                }
+                $article->addTag($entityTag[0]);
+            }
+
             $entityManager->persist($article);
             $entityManager->flush();
 

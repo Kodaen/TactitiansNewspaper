@@ -34,13 +34,12 @@
                 <li><a href="/home">Home</a></li>
                 <li><a href="/news">News</a></li>
                 <li><a href="/potw">Play of the week</a></li>
-                <li><a href="">World Record</a></li>
-                <li><a href="">Funny Stuff</a></li>
                 {%if is_granted('ROLE_ADMIN') %}
                 <HR class="admintool"></HR>
                 <li class="admintool"><a href="/admin/user">Users</a></li>
                 <li class="admintool"><a href="/admin/article">Article</a></li>
-                <li class="admintool"><a href="/admin/POTWcrud">POTW Crud</a></li>
+                <li class="admintool"><a href="/admin/POTWcrud">POTW</a></li>
+                <li class="admintool"><a href="/admin/contact">Messagerie</a></li>
                 
                 
                 {%endif%} 
@@ -52,7 +51,11 @@
         </main>
 
         <footer>
-         <p>Test</p>    
+            <ul>
+                <li>Ce site est légal</li>
+                <li><a href="/contact/new">Contact</a></li>  
+            </ul>
+
         </footer>
         
         

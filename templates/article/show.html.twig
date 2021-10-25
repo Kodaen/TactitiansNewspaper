@@ -5,9 +5,19 @@
 {% block content %}
     <h1>{{ article.name }}</h1>
 
-    <p>{{ article.Content }}</p>
+    <p>{{ article.Content|raw }}</p>
 
     <p>{{ article.Date ? article.Date|date('Y-m-d') : '' }}</p>
+
+    <span>
+        {% for tag in article.tags %}
+            <p class="tags">
+                {{ tag.name }}
+            </p>
+        {% else %}
+            No Tags
+        {% endfor %}
+    </span>
 
 
     {%if is_granted('ROLE_ADMIN') %}

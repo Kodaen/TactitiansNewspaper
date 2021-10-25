@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article
 {
@@ -40,12 +39,7 @@ class Article
     private $Date;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $tag;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="articles")
+     * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="articles")
      */
     private $tags;
 
@@ -107,18 +101,6 @@ class Article
         return $this;
     }
 
-    public function getTag(): ?string
-    {
-        return $this->tag;
-    }
-
-    public function setTag(?string $tag): self
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Tag[]
      */
@@ -126,12 +108,12 @@ class Article
     {
         return $this->tags;
     }
-
+    
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
-            $tag->setArticles($this);
+            $tag->addArticle($this);
         }
 
         return $this;
@@ -140,10 +122,7 @@ class Article
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->removeElement($tag)) {
-            // set the owning side to null (unless already changed)
-            if ($tag->getArticles() === $this) {
-                $tag->setArticles(null);
-            }
+            $tag->removeArticle($this);
         }
 
         return $this;
